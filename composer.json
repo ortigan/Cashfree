@@ -1,0 +1,21 @@
+{
+    "name": "ortigan/cashfree",
+    "description": "Cashfree Library for Laravel",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "7.4.x-dev"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Ortigan\\Cashfree\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Vinayak Kalushe",
+            "email": "Vinayak.k160@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
