@@ -7,6 +7,10 @@
         "guzzlehttp/guzzle": "^7.2"
     },
     "license": "MIT",
+    "keywords": [
+        "cashfree",
+        "laravel"
+    ],
     "authors": [
         {
             "name": "Vinayak Kalushe",
