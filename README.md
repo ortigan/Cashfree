@@ -1,5 +1,7 @@
-# Cashfree library for laravel
-Simplified laravel library for cashfree integration. The package provides easy to use functions that will enable you to integrate cashfree API's seamlessly  
+# Cashfree package for laravel
+[![Total Downloads](http://poser.pugx.org/ortigan/cashfree/downloads)](https://packagist.org/packages/ortigan/cashfree) [![License](http://poser.pugx.org/ortigan/cashfree/license)](https://packagist.org/packages/ortigan/cashfree) 
+
+Simplified laravel package for cashfree integration. The package provides easy to use functions that will enable you to integrate cashfree API's seamlessly.
 
 ## Installation
 You can install the package via composer:
@@ -11,6 +13,30 @@ You can optionally publish the config file with:
  php artisan vendor:publish --provider="Ortigan\Cashfree\CashfreeServiceProvider" --tag="cashfree-config"
 ```
 
+## Configuration
+Modify your `.env`
+
+### Required
+```
+// required if you use "Auto Collect" 
+CASHFREE_AUTO_COLLECT_CLIENT_ID=
+CASHFREE_AUTO_COLLECT_SECRET_KEY=
+
+// required if you use "Payout"
+CASHFREE_PAYOUT_CLIENT_ID=
+CASHFREE_PAYOUT_CLIENT_KEY=
+```
+
+### Optional
+```
+CASHFREE_SANDBOX=true|false
+CASHFREE_AUTO_COLLECT_TEST_URL=
+CASHFREE_AUTO_COLLECT_PROD_URL=
+CASHFREE_AUTO_COLLECT_AUTH_ROUTE=
+CASHFREE_PAYOUT_TEST_URL=
+CASHFREE_PAYOUT_PROD_URL=
+CASHFREE_PAYOUT_AUTH_ROUTE=
+```
 
 ## Basic Usage
 
