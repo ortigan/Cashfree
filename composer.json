@@ -7,16 +7,23 @@
         "guzzlehttp/guzzle": "^7.2"
     },
     "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Ortigan\\Cashfree\\": "src/"
-        }
-    },
     "authors": [
         {
             "name": "Vinayak Kalushe",
             "email": "Vinayak.k160@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Ortigan\\Cashfree\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ortigan\\Cashfree\\CashfreeServiceProvider"
+            ]
+        }
+    },
     "minimum-stability": "dev"
 }
