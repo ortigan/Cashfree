@@ -3,6 +3,7 @@
     "description": "Cashfree Library for Laravel",
     "type": "library",
     "require": {
+        "php": ">=7.4",
         "guzzlehttp/guzzle": "7.4.x-dev"
     },
     "license": "MIT",
