@@ -3,34 +3,57 @@
 namespace Ortigan\Cashfree;
 
 use Illuminate\Support\Facades\Http;
-
-class AutoCollect {
-    private $token, $token_expiry;
+use Exception;
+class AutoCollect extends Request {
+    
     //constructor
-    public function __construct($clientId, $clientSecret) {
-        $this->getToken($clientId, $clientSecret);
+    public function __construct() {
+        parent::$request_type = 'auto_collect';
     }
-    public function baseUrl()
+    public function getVirtualAccounts(array $params = null)
     {
-        return config('cashfree.sandbox') ? config('cashfree.auto_collect.test_base_url') : config('cashfree.auto_collect.prod_base_url');
+        $route = '/cac/v1/allVA' . Util::arrayToParams($params);
+        return $this->get($route);
     }
-    public function createVirtualAccount($data){
-        $url = $this->baseUrl() . '/cac/v1/createVA';
-        $response = Http::withToken($this->token)->post($url, $data);
-        if ($response->status() == 200) {
-            return (object) collect($response->json())->all();
-        }
-        else {
-            return (object) collect($response->json())->all();
-        }
+    public function createVirtualAccount(array $data){
+        $route ='/cac/v1/createVA';
+        return parent::post($route, $data);
     }
-    public function getToken($clientId, $clientSecret){
-        $url = $this->baseUrl() . '/cac/v1/authorize';
-        $response = Http::withHeaders([
-            'X-Client-ID' => $clientId,
-            'X-Client-Secret' => $clientSecret
-        ])->post($url);
-        $this->token = $response->json()['data']['token'];
-        $this->token_expiry = $response->json()['data']['expiry'];
+    public  function getVirtualAccount($vAccountId){
+        $route = '/cac/v1/va/' . $vAccountId;
+        return parent::get($route);
+    }
+    public function changeVAStatus( string $vAccountId, string $status)
+    {
+        $route = '/cac/v1/changeVAStatus';
+        return parent::post($route, [
+            'vAccountId' => $vAccountId,
+            'status' => $status
+        ]);
+    }
+    public function createQR(string $virualVPA)
+    {
+        $route = '/cac/v1/createQRCode' . Util::arrayToParams([
+            'virtualVPA' => $virualVPA
+        ]);
+        return parent::get($route);
+    }
+    public function createDynamicQR(string $virualVPA, float $amount)
+    {
+        $route = '/cac/v1/createDynamicQRCode' . Util::arrayToParams([
+            'virtualVPA' => $virualVPA,
+            'amount' => $amount
+        ]);
+        return parent::get($route);
+    }
+    public function getRecentPayments(array $params = null)
+    {
+        $route = '/cac/v1/payments' . Util::arrayToParams($params);
+        return parent::get($route);
+    }
+    public function getRecentVAPayments(string $vAccountId)
+    {
+        $route = '/cac/v1/payments/' . $vAccountId;
+        return parent::get($route);
     }
 }
