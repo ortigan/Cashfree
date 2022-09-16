@@ -17,6 +17,11 @@ return [
         'client_id' => env('CASHFREE_PAYOUT_CLIENT_ID', null),
         'secret_key' => env('CASHFREE_PAYOUT_CLIENT_KEY', null),
         'auth_route' => env('CASHFREE_PAYOUT_AUTH_ROUTE', '/payout/v1/authorize'),
+    ],
+    'verification' => [
+        'test_base_url' => env('CASHFREE_VERIFICATION_TEST_URL', 'https://sandbox.cashfree.com/verification'),
+        'prod_base_url' =>  env('CASHFREE_VERIFICATION_PROD_URL', 'https://api.cashfree.com/verification'),
+        'client_id' => env('CASHFREE_PAYOUT_CLIENT_ID', null),
+        'secret_key' => env('CASHFREE_PAYOUT_CLIENT_KEY', null),
     ]
-
 ];
