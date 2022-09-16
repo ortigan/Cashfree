@@ -11,4 +11,8 @@ class Cashfree {
     {
         return new Payout();
     }
+    public static function verification()
+    {
+        return new Verification();
+    }
 }

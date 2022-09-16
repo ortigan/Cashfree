@@ -22,7 +22,15 @@ class Request extends Token {
     public function post($route, $data)
     {
         try {
-            $response = Http::withToken($this->getToken( self::$request_type ))->post( self::baseUrl() . $route, $data);
+            if ( self::$request_type == 'verification' ){
+                parent::setKeys(self::$request_type);
+                $response = Http::withHeaders([
+                    'x-client-id' => parent::$clientId,
+                    'x-client-secret' => parent::$clientSecret
+                ])->post( self::baseUrl() . $route, $data);
+            } else {
+                $response = Http::withToken($this->getToken( self::$request_type ))->post( self::baseUrl() . $route, $data);
+            }
             return self::response($response);
         } catch ( Exception $e ){
             throw new Exception($e, 1);
