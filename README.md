@@ -71,6 +71,7 @@ Response
 
 - Payout
 - Auto Collect
+- Verification Suite
 
 
 ## License
