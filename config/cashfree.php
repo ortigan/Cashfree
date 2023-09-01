@@ -23,5 +23,11 @@ return [
         'prod_base_url' =>  env('CASHFREE_VERIFICATION_PROD_URL', 'https://api.cashfree.com/verification'),
         'client_id' => env('CASHFREE_PAYOUT_CLIENT_ID', null),
         'secret_key' => env('CASHFREE_PAYOUT_CLIENT_KEY', null),
+    ],
+    'payment_gateway' => [
+        'test_base_url' => env('CASHFREE_PAYMENT_GATEWAY_TEST_URL', 'https://sandbox.cashfree.com/pg'),
+        'prod_base_url' =>  env('CASHFREE_PAYMENT_GATEWAY_PROD_URL', 'https://api.cashfree.com/pg'),
+        'client_id' => env('CASHFREE_PAYMENT_GATEWAY_CLIENT_ID', null),
+        'secret_key' => env('CASHFREE_PAYMENT_GATEWAY_CLIENT_KEY', null),
     ]
 ];
