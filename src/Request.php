@@ -13,7 +13,16 @@ class Request extends Token {
     public function get($route)
     {
         try {
-            $response = Http::withToken($this->getToken( self::$request_type ))->get( self::baseUrl() . $route);
+            if ( self::$request_type == 'verification' || self::$request_type == 'payment_gateway' ) {
+                parent::setKeys(self::$request_type);
+                $response = Http::withHeaders([
+                    'x-client-id' => parent::$clientId,
+                    'x-client-secret' => parent::$clientSecret,
+                    'x-api-version' => '2023-08-01'
+                    ])->get( self::baseUrl() . $route);
+            } else {
+                $response = Http::withToken($this->getToken( self::$request_type ))->get( self::baseUrl() . $route);
+            }
             return self::response($response);
         } catch ( Exception $e ){
             throw new Exception($e, 1);
@@ -22,11 +31,12 @@ class Request extends Token {
     public function post($route, $data)
     {
         try {
-            if ( self::$request_type == 'verification' ){
+            if ( self::$request_type == 'verification' || self::$request_type == 'payment_gateway' ) {
                 parent::setKeys(self::$request_type);
                 $response = Http::withHeaders([
                     'x-client-id' => parent::$clientId,
-                    'x-client-secret' => parent::$clientSecret
+                    'x-client-secret' => parent::$clientSecret,
+                    'x-api-version' => '2023-08-01'
                 ])->post( self::baseUrl() . $route, $data);
             } else {
                 $response = Http::withToken($this->getToken( self::$request_type ))->post( self::baseUrl() . $route, $data);
@@ -38,7 +48,9 @@ class Request extends Token {
     }
     public static function response($response)
     {
+       
         return (object) collect($response->json())->all();
+      
     }
     
 }
